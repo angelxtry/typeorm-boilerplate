@@ -1,8 +1,8 @@
 import {
-  Entity, PrimaryGeneratedColumn, Column, BeforeInsert,
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
 } from 'typeorm';
-
-import uuidv4 from 'uuid/v4';
 
 export enum ProviderEnum {
   GOOGLE = 'GOOGLE',
@@ -22,25 +22,4 @@ export class User {
 
   @Column({ type: 'varchar', length: 255 })
   email: string;
-
-  @Column({ type: 'varchar', length: 255 })
-  nickname: string;
-
-  @Column({ type: 'enum', enum: ProviderEnum })
-  provider: ProviderEnum;
-
-  @Column('uuid')
-  snsId: string;
-
-  @Column({
-    type: 'enum',
-    enum: OpenImageChoiceEnum,
-    default: OpenImageChoiceEnum.OPEN,
-  })
-  openImageChoice: OpenImageChoiceEnum;
-
-  @BeforeInsert()
-  addSnsId() {
-    this.snsId = uuidv4();
-  }
 }
